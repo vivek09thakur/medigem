@@ -13,10 +13,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -97,12 +100,22 @@ SIMPLE_JWT = {
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('POSTGRES_URL'),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DATABASE'),  
+        'USER': os.environ.get('POSTGRES_USER'), 
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('POSTGRES_HOS'), 
+        'PORT': '5432', 
+        'OPTIONS': {
+            'sslmode': 'require',  # Add this if SSL is required
+        },
+    }
 }
+
+print("POSTGRES_HOST:", os.environ.get("POSTGRES_HOST"))
+print("DATABASE CONFIG:", DATABASES)
+print("POSTGRES_HOST:", os.getenv("POSTGRES_HOST"))
 
 
 
