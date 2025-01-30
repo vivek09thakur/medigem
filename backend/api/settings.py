@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
-    'authentication'
+    'authentication',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -54,10 +55,26 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 
 ROOT_URLCONF = 'api.urls'
+# CORS_ALLOW_ALL_ORIGINS = True Not all CORS allowed only localhost
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 TEMPLATES = [
     {
@@ -111,7 +128,7 @@ DATABASES = {
     'DISABLE_SERVER_SIDE_CURSORS': True,
   }
 }
-print(DATABASES)
+
 
 
 
