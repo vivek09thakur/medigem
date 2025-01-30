@@ -24,26 +24,50 @@ const LandingPage = () => {
 
   const IntroSection = () => {
     return (
-      <>
-        <div className="intro">
-          <h1 className="intro-title">medi<span style={{color:"#6589fffb"}}>Gem</span></h1>
-          <h3>medical Gemma</h3>
-
-          <div className="btn-box">
+      <div className="intro">
+        <h1 className="intro-title">
+          <span
+            style={{
+              background:
+                "linear-gradient(90deg,rgb(108, 164, 255), #4285F4)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            mediGem
+          </span>
+        </h1>
+        <h3>Your Partner in Health</h3>{" "}
+        <div className="btn-box">
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
-          </div>
-          <div className="intro-content">
-            </div>
         </div>
-      </>
+        <div className="intro-content">
+          <p>
+            Welcome to mediGem, your AI-powered healthcare platform. Manage your
+            health records, appointments, and provider communications with our
+            advanced AI technology.
+          </p>
+        </div>
+      </div>
     );
   };
 
   return (
-    <div>
+    <div className="landing-container">
       <Header />
       <IntroSection />
+      <style>
+        {`
+          .landing-container {
+            position: relative;
+            min-height: 100vh;
+          }
+          .intro {
+            position: relative;
+          }
+        `}
+      </style>
     </div>
   );
 };
