@@ -8,60 +8,60 @@
 }
 
 .login-form {
-    padding: 48px 40px 36px;
-    border: 1px solid #dadce0;
-    border-radius: 3rem;
-    width: 450px;
+    padding: 3rem 2.5rem 2.25rem;
+    border: 0.0625rem solid #dadce0;
+    border-radius: 1rem;
+    width: 28.125rem;
     box-sizing: border-box;
 }
 
 .login-header {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 2rem;
 }
 
 .login-title {
     color: #202124;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .login-subtitle {
     color: #202124;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
     margin-bottom: 0;
 }
 
 .login-inputs {
-    margin: 20px 0;
+    margin: 1.25rem 0;
 }
 
 .login-input {
     width: 100%;
-    height: 54px;
-    margin: 8px 0;
-    padding: 13px 15px;
-    border: 1px solid #dadce0;
-    border-radius: 20rem;
-    font-size: 16px;
+    height: 3.375rem;
+    margin: 0.5rem 0;
+    padding: 0.8125rem 0.9375rem;
+    border: 0.0625rem solid #dadce0;
+    border-radius: .5rem;
+    font-size: 1rem;
     color: #202124;
     outline: none;
     transition: border 0.2s;
 }
 
 .login-input:focus {
-    border: 2px solid var(--link-color);
+    border: 0.125rem solid var(--link-color);
 }
 
 .login-button {
     background-color: var(--link-color);
     color: white;
-    padding: 12px 24px;
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 20rem;
-    font-size: 14px;
+    border-radius: .5rem;
+    font-size: 0.875rem;
     font-weight: 500;
     width: 100%;
     cursor: pointer;
@@ -74,9 +74,9 @@
 }
 
 .login-signup-prompt {
-    margin-top: 20px;
+    margin-top: 1.25rem;
     color: #5f6368;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .login-signup-link {
