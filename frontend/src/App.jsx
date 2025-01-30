@@ -4,6 +4,7 @@ import Login from "./compoents/Login";
 import SignUp from "./compoents/SignUp";
 import MainPage from "./compoents/MainPage";
 import PrivateRoute from "./compoents/PrivateRoutes";
+import "./App.css";
 
 function App() {
   return (

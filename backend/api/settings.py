@@ -29,7 +29,11 @@ SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app','localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 
+                 '.vercel.app',
+                 'localhost',
+                 'legendary-system-x7g66gg797qh6x7p-8000.app.github.dev'
+                ]
 
 
 # Application definition
@@ -48,6 +52,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,15 +60,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 
 
 ROOT_URLCONF = 'api.urls'
-# CORS_ALLOW_ALL_ORIGINS = True Not all CORS allowed only localhost
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://legendary-system-x7g66gg797qh6x7p-5173.app.github.dev",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -74,6 +79,18 @@ CORS_ALLOW_METHODS = [
     'PATCH',
     'POST',
     'PUT',
+]
+CORS_ALLOW_ALL_ORIGINS = True  #  i have to remove this later
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 TEMPLATES = [

@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(`${api}/api/auth/login/`, credentials)
+      const response = await axios.post(`${api}/login/`, credentials)
       localStorage.setItem('token', response.data.access)
       navigate('/main')
     } catch (error) {
@@ -19,22 +19,20 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="p-8 border rounded shadow-lg">
-        <h2 className="text-2xl mb-4">Login</h2>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <h2>Login</h2>
         <input
           type="text"
           placeholder="Username"
           onChange={(e) => setCredentials({...credentials, username: e.target.value})}
-          className="block mb-2 p-2 border rounded"
         />
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setCredentials({...credentials, password: e.target.value})}
-          className="block mb-4 p-2 border rounded"
         />
-        <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded">
+        <button type="submit">
           Login
         </button>
       </form>
