@@ -15,6 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${api}/login/`, credentials);
+      console.log('API URL:', import.meta.env.VITE_API_URL);
       localStorage.setItem("token", response.data.access);
       navigate("/main");
     } catch (error) {
