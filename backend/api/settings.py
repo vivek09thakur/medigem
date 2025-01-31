@@ -24,15 +24,16 @@ load_dotenv()
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^'
+SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$eu)=7*f#d0#zs$44xx-h^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 
-                 '.vercel.app',
-                 'localhost',
-                ]
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    '.vercel.app',
+    'localhost',
+]
 
 
 # Application definition
@@ -52,7 +53,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,8 +67,6 @@ ROOT_URLCONF = 'api.urls'
 
 CORS_ALLOWED_ORIGINS = [
     "https://medigem.vercel.app",
-    # "http://localhost:5173",
-    # "https://legendary-system-x7g66gg797qh6x7p-5173.app.github.dev",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -80,7 +78,7 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
-CORS_ALLOW_ALL_ORIGINS = True  #  i have to remove this later
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
