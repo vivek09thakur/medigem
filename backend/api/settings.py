@@ -32,7 +32,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 
                  '.vercel.app',
                  'localhost',
-                #  'legendary-system-x7g66gg797qh6x7p-8000.app.github.dev'
                 ]
 
 
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,7 +60,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 
@@ -69,7 +68,7 @@ ROOT_URLCONF = 'api.urls'
 CORS_ALLOWED_ORIGINS = [
     # "http://localhost:5173",
     # "https://legendary-system-x7g66gg797qh6x7p-5173.app.github.dev",
-    "https://medigem.vercel.app"
+    "https://medigem.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
