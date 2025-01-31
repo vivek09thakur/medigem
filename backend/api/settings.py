@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 
                  '.vercel.app',
                  'localhost',
-                 'legendary-system-x7g66gg797qh6x7p-8000.app.github.dev'
+                #  'legendary-system-x7g66gg797qh6x7p-8000.app.github.dev'
                 ]
 
 
@@ -67,8 +67,9 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'api.urls'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "https://legendary-system-x7g66gg797qh6x7p-5173.app.github.dev",
+    # "http://localhost:5173",
+    # "https://legendary-system-x7g66gg797qh6x7p-5173.app.github.dev",
+    "https://medigem.vercel.app"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
