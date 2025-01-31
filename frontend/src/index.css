@@ -1,7 +1,6 @@
 :root{
-    --primary-background: #f5f5f5;
-    --secondary-background: #ffffff;
-    --text-color: #333333;
+    --primary-background: #fdfdfd;
+    --text-color: #000000;
     --link-color: #5fa4ff;
     --poppins: 'Poppins', sans-serif;
     --roboto: 'Roboto Mono', monospace;
@@ -10,7 +9,6 @@
 html{
     height: 100dvh;
     width: 100%;
-    max-width: 1440px;
 }
 
 body{
