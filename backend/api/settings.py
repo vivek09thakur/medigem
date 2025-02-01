@@ -55,6 +55,7 @@ ROOT_URLCONF = 'api.urls'
 
 CORS_ALLOWED_ORIGINS = [
     "https://medigem.vercel.app"
+    # "http://localhost:5173"  # Remove the trailing slash
 ]
 
 CORS_ALLOW_CREDENTIALS = True

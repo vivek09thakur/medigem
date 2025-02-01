@@ -14,7 +14,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${api}/login/`, credentials);
+      const response = await axios.post(`${api}/login/`, credentials,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+
+      );
       console.log('API URL:', import.meta.env.VITE_API_URL);
       localStorage.setItem("token", response.data.access);
       navigate("/main");
