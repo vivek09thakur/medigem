@@ -54,8 +54,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'api.urls'
 
 CORS_ALLOWED_ORIGINS = [
-    "https://medigem.vercel.app"
-    # "http://localhost:5173"  # Remove the trailing slash
+    "https://medigem.vercel.app",
+    "https://medi-gemma-backend.vercel.app"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
