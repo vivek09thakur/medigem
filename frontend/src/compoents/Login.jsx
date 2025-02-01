@@ -16,6 +16,7 @@ const Login = () => {
     try {
       const response = await axios.post(`${api}/login/`, credentials,
         {
+          withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },
