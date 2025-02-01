@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 def add_cors_headers(response):
     """Helper function to add CORS headers to response"""
-    response["Access-Control-Allow-Origin"] = "https://medi-gemma-backend.vercel.app"
+    response["Access-Control-Allow-Origin"] = "https://medigem.vercel.app"
     response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
     response["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     response["Access-Control-Allow-Credentials"] = "true"
