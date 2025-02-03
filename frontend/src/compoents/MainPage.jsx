@@ -12,7 +12,7 @@ const MainPage = () => {
     const typeMessage = (text, index = 0) => {
         if (index < text.length) {
             setDisplayText(prev => text.substring(0, index + 1));
-            setTimeout(() => typeMessage(text, index + 1), 20);
+            setTimeout(() => typeMessage(text, index + 1), 0.5);
         } else {
             setTyping(false);
         }
