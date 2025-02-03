@@ -8,6 +8,7 @@ const Login = () => {
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const api = import.meta.env.VITE_API_URL;
 
@@ -25,9 +26,11 @@ const Login = () => {
       );
       console.log('API URL:', import.meta.env.VITE_API_URL);
       localStorage.setItem("token", response.data.access);
+      setError("");
       navigate("/main");
     } catch (error) {
       console.error("Login failed:", error);
+      setError("Invalid username or password");
     }
   };
 
@@ -58,12 +61,13 @@ const Login = () => {
             }
           />
         </div>
+        {error && <p className="login-error">{error}</p>}
         <button className="login-button" type="submit">
           Sign In
         </button>
       </form>
       <p className="login-signup-prompt">
-        Don&apos;t have an account?{" "}
+        Don't have an account?{" "}
         <Link className="login-signup-link" to="/signup">
           Create account
         </Link>
