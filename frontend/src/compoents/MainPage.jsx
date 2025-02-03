@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Markdown from 'react-markdown'
 import "./styles/Main.css";
 
 const MainPage = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
+    const [typing, setTyping] = useState(false);
+    const [displayText, setDisplayText] = useState("");
     const api = import.meta.env.VITE_API_URL;
+
+    const typeMessage = (text, index = 0) => {
+        if (index < text.length) {
+            setDisplayText(prev => text.substring(0, index + 1));
+            setTimeout(() => typeMessage(text, index + 1), 20);
+        } else {
+            setTyping(false);
+        }
+    };
 
     const sendMessage = async () => {
         if (!input.trim()) return;
@@ -23,6 +35,9 @@ const MainPage = () => {
             const data = await response.json();
             const botMessage = { role: "bot", text: data.response || "I'm not sure how to respond." };
             setMessages((prev) => [...prev, botMessage]);
+            setTyping(true);
+            setDisplayText("");
+            typeMessage(botMessage.text);
         } catch (error) {
             setMessages((prev) => [...prev, { role: "bot", text: "Error fetching response." }]);
         }
@@ -34,7 +49,13 @@ const MainPage = () => {
                 <div className="messages">
                     {messages.map((msg, index) => (
                         <div key={index} className={`message ${msg.role}`}>
-                            {msg.text}
+                            {msg.role === "bot" ? (
+                                <Markdown>
+                                    {index === messages.length - 1 && typing ? displayText : msg.text}
+                                </Markdown>
+                            ) : (
+                                msg.text
+                            )}
                         </div>
                     ))}
                 </div>
