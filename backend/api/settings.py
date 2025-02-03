@@ -55,8 +55,6 @@ ROOT_URLCONF = 'api.urls'
 
 CORS_ALLOWED_ORIGINS = [
     "https://medigem.vercel.app",
-    "https://medi-gemma-backend.vercel.app",
-    "http://localhost:5173",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -177,6 +175,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Media files
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
