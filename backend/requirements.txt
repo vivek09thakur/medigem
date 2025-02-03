@@ -12,3 +12,4 @@ tzdata
 python-decouple
 django-cors-headers
 whitenoise
+openai

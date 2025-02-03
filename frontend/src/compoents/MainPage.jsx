@@ -4,23 +4,24 @@ import "./styles/Main.css";
 const MainPage = () => {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
+    const api = import.meta.env.VITE_API_URL;
 
     const sendMessage = async () => {
         if (!input.trim()) return;
-        
+
         const userMessage = { role: "user", text: input };
         setMessages((prev) => [...prev, userMessage]);
         setInput("");
 
         try {
-            const response = await fetch("https://medi-gemma-backend.vercel.app/chat", {
+            const response = await fetch(`${api}/chat/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: input })
             });
-            
+
             const data = await response.json();
-            const botMessage = { role: "bot", text: data.reply || "I'm not sure how to respond." };
+            const botMessage = { role: "bot", text: data.response || "I'm not sure how to respond." };
             setMessages((prev) => [...prev, botMessage]);
         } catch (error) {
             setMessages((prev) => [...prev, { role: "bot", text: "Error fetching response." }]);
@@ -38,9 +39,9 @@ const MainPage = () => {
                     ))}
                 </div>
                 <div className="input-box">
-                    <input 
-                        type="text" 
-                        value={input} 
+                    <input
+                        type="text"
+                        value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder="Type a message..."
                     />

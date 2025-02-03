@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #fff;
+    background-color: var(--primary-background);
     padding: 20px;
 }
 
@@ -22,17 +22,19 @@
 }
 
 .signup-title {
-    color: #202124;
+    color: var(--text-color);
     font-size: 24px;
     font-weight: 400;
     margin-bottom: 10px;
+    font-family: var(--poppins);
 }
 
 .signup-subtitle {
-    color: #202124;
+    color: var(--text-color);
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 0;
+    font-family: var(--poppins);
 }
 
 .signup-inputs {
@@ -47,13 +49,14 @@
     border: 1px solid #dadce0;
     border-radius: 4px;
     font-size: 16px;
-    color: #202124;
+    color: var(--text-color);
     outline: none;
     transition: border 0.2s;
+    font-family: var(--poppins);
 }
 
 .signup-input:focus {
-    border: 2px solid #1a73e8;
+    border: 2px solid var(--link-color);
 }
 
 .password-inputs {
@@ -64,7 +67,7 @@
 }
 
 .signup-button {
-    background-color: #1a73e8;
+    background-color: var(--link-color);
     color: white;
     padding: 12px 24px;
     border: none;
@@ -75,6 +78,7 @@
     cursor: pointer;
     transition: background-color 0.2s;
     margin-top: 24px;
+    font-family: var(--poppins);
 }
 
 .signup-button:hover {

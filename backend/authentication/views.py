@@ -7,6 +7,16 @@ from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.views.decorators.csrf import csrf_exempt
+from dotenv import load_dotenv
+from os import getenv
+import os
+from openai import OpenAI
+
+load_dotenv()
+gpt_token = getenv('GPT_TOKEN')
+endpoint = "https://models.inference.ai.azure.com"
+model_name = "gpt-4o"
+
 
 @csrf_exempt
 @api_view(['GET', 'OPTIONS'])
@@ -124,4 +134,51 @@ def token_refresh(request):
         return Response(
             {'error': 'Invalid refresh token'}, 
             status=status.HTTP_401_UNAUTHORIZED
+        )
+
+
+@csrf_exempt
+@api_view(['POST', 'OPTIONS'])
+def chat(request):
+    if request.method == "OPTIONS":
+        response = Response(status=status.HTTP_200_OK)
+        return response
+
+    client = OpenAI(
+        base_url=endpoint,
+        api_key=gpt_token,
+    )
+
+    user_message = request.data.get('message')
+    if not user_message:
+        return Response(
+            {'error': 'Message is required'}, 
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        response = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant.",
+                },
+                {
+                    "role": "user",
+                    "content": user_message,
+                }
+            ],
+            temperature=1.0,
+            top_p=1.0,
+            max_tokens=1000,
+            model=model_name
+        )
+
+        return Response({
+            'response': response.choices[0].message.content
+        })
+    except Exception as e:
+        return Response(
+            {'error': str(e)}, 
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
