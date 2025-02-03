@@ -1,0 +1,106 @@
+/* Existing styles */
+.about-section {
+  width: 100%;
+  padding: 2rem;
+  background-color: var(--accent-color);
+  color:var(--bg-primary);
+}
+
+.about-section h2{
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--background-color);
+  text-align: center;
+  margin: 0 0 4rem 0;
+}
+
+.about-section .about-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  gap: 2rem;
+}
+
+/* Additional styles for about section components */
+.key-features h3,
+.mission h3,
+.technology h3 {
+  color: var(--background-color);
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.key-features ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.key-features li {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--background-color);
+  font-size: 1.2rem;
+}
+
+.key-features li:before {
+  content: "•";
+  color: var(--background-color);
+  position: absolute;
+  left: 0;
+}
+
+.mission,
+.technology {
+  text-align: center;
+  max-width: 800px;
+}
+
+.about-content p {
+  line-height: 1.6;
+  color: var(--background-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .about-section {
+    padding: 1rem;
+  }
+
+  .about-section h2 {
+    font-size: 2.5rem;
+    margin: 0 0 2rem 0;
+  }
+
+  .about-section .about-content {
+    width: 95%;
+    gap: 1.5rem;
+  }
+
+  .key-features h3,
+  .mission h3,
+  .technology h3 {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-section h2 {
+    font-size: 2rem;
+  }
+
+  .key-features h3,
+  .mission h3,
+  .technology h3 {
+    font-size: 1.5rem;
+  }
+
+  .about-content p {
+    font-size: 1.1rem;
+  }
+}
