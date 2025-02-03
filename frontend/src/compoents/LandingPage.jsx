@@ -14,7 +14,7 @@ const LandingPage = () => {
       <div className="header">
         <div className="nav">
           <div className="logo">
-            <Link to="/">mediGem</Link>
+            <Link to="/" style={{ color: "var(--accent-color)" }}>mediGem</Link>
           </div>
           <div className={`hamburger ${isOpen ? "active" : ""}`} onClick={toggleMenu}>
             <span></span>
@@ -39,21 +39,27 @@ const LandingPage = () => {
         <h1 className="intro-title">
           <span
             style={{
-              background: "linear-gradient(90deg, rgb(108, 164, 255), #4285F4)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              color: "var(--accent-color)",
             }}
           >
             mediGem
           </span>
         </h1>
-        <h3>Your Partner in Health</h3>
+        <h3 style={{ color: "var(--text-primary)" }}>Your Partner in Health</h3>
         <div className="btn-box">
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/login" style={{ 
+            backgroundColor: "var(--accent-color)",
+            color: "#000000",
+            transition: "all 0.3s ease-in-out"
+          }}>Login</Link>
+          <Link to="/signup" style={{ 
+            backgroundColor: "var(--accent-color)",
+            color: "#000000",
+            transition: "all 0.3s ease-in-out"
+          }}>Sign Up</Link>
         </div>
         <div className="intro-content">
-          <p>
+          <p style={{ color: "var(--text-primary)" }}>
             Welcome to mediGem, your AI-powered healthcare platform. Manage your
             health records, appointments, and provider communications with our
             advanced AI technology.
@@ -64,7 +70,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="landing-container">
+    <div className="landing-container" style={{ backgroundColor: "var(--bg-primary)" }}>
       <Header />
       <IntroSection />
     </div>
