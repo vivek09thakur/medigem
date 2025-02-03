@@ -12,7 +12,7 @@ load_dotenv()
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$eu)=7*f#d0#zs$44xx-h^'
+SECRET_KEY = getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -27,6 +27,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,7 +37,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'authentication',
-    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -56,10 +56,11 @@ ROOT_URLCONF = 'api.urls'
 CORS_ALLOWED_ORIGINS = [
     "https://medigem.vercel.app",
     "https://medi-gemma-backend.vercel.app",
-    "*"
+    "http://localhost:5173",
 ]
-# CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -68,7 +69,9 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
+
 CORS_ALLOW_ALL_ORIGINS = False
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',

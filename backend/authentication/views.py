@@ -8,14 +8,6 @@ from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.views.decorators.csrf import csrf_exempt
 
-# def add_cors_headers(response):
-#     # """Helper function to add CORS headers to response"""
-#     # response["Access-Control-Allow-Origin"] = "https://medigem.vercel.app"
-#     # response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-#     # response["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Access-Control-Allow-Origin"
-#     # # response["Access-Control-Allow-Credentials"] = "true"
-#     return response
-
 @csrf_exempt
 @api_view(['GET', 'OPTIONS'])
 def index(request):
@@ -108,3 +100,28 @@ def login(request):
             status=status.HTTP_401_UNAUTHORIZED
         )
         return response
+
+@csrf_exempt
+@api_view(['POST', 'OPTIONS'])
+def token_refresh(request):
+    if request.method == "OPTIONS":
+        response = Response(status=status.HTTP_200_OK)
+        return response
+        
+    refresh_token = request.data.get('refresh')
+    if not refresh_token:
+        return Response(
+            {'error': 'Refresh token is required'}, 
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    
+    try:
+        refresh = RefreshToken(refresh_token)
+        return Response({
+            'access': str(refresh.access_token),
+        })
+    except Exception:
+        return Response(
+            {'error': 'Invalid refresh token'}, 
+            status=status.HTTP_401_UNAUTHORIZED
+        )
