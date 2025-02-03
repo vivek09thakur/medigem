@@ -27,7 +27,6 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'authentication',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -53,12 +53,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'api.urls'
 
-# CORS_ALLOWED_ORIGINS = [
-#     "https://medigem.vercel.app"
-#     # "https://medi-gemma-backend.vercel.app"
-# ]
-CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://medigem.vercel.app",
+    "https://medi-gemma-backend.vercel.app",
+    "*"
+]
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -67,23 +68,18 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = "*"
-# CORS_ALLOW_HEADERS = [
-#     'accept',
-#     'accept-encoding',
-#     'authorization',
-#     'content-type',
-#     'dnt',
-#     'origin',
-#     'user-agent',
-#     'x-csrftoken',
-#     'x-requested-with',
-#     "access-control-allow-origin",
-#     "access-control-allow-headers",
-#     "access-control-allow-methods",
-#     "strict-origin-when-cross-origin"
-# ]
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 TEMPLATES = [
     {
