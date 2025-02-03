@@ -1,13 +1,14 @@
 /* Dark theme similar to ChatGPT */
 .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    background: var(--primary-background);
-    color: var(--text-color);
-    font-family: var(--poppins);
-    padding: 0 15px;
+    justify-content: flex-start;
+    min-height: 100%;
+    background-color: var(--primary-background);
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
 }
 
 .chat-box {

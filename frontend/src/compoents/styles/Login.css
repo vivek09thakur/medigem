@@ -3,9 +3,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    background-color: var(--background-color);
-    padding: 1rem;
+    min-height: 100%;
+    background-color: var(--primary-background);
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
 }
 
 .login-form {
@@ -90,6 +92,13 @@
 
 .login-signup-link:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-height: 600px) {
+    .login-container {
+        min-height: auto;
+        padding: 2rem 1rem;
+    }
 }
 
 @media screen and (max-width: 480px) {
