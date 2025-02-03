@@ -78,7 +78,10 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
-    "access-control-allow-origin"
+    "access-control-allow-origin",
+    "access-control-allow-headers",
+    "access-control-allow-methods",
+    "strict-origin-when-cross-origin"
 ]
 
 TEMPLATES = [
