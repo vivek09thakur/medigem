@@ -15,7 +15,7 @@ from openai import OpenAI
 load_dotenv()
 gpt_token = getenv('GPT_TOKEN')
 endpoint = "https://models.inference.ai.azure.com"
-model_name = "gpt-4o"
+model_name = "gpt-4o-mini"
 
 
 @csrf_exempt
