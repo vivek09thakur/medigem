@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { useState, memo } from "react";
+import PropTypes from "prop-types";
 import About from "./atoms/about";
 import "./styles/LandPageStyle.css";
 
@@ -31,6 +32,13 @@ const Header = memo(({ isOpen, toggleMenu }) => (
     </div>
   </div>
 ));
+
+Header.displayName = "Header";
+
+Header.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
+};
 
 const IntroSection = memo(() => (
   <div className="intro">
@@ -70,8 +78,7 @@ const IntroSection = memo(() => (
   </div>
 ));
 
-
-
+IntroSection.displayName = "IntroSection";
 
 const LandingPage = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,5 +98,7 @@ const LandingPage = () => {
     </div>
   );
 };
+
+LandingPage.displayName = "LandingPage";
 
 export default memo(LandingPage);
