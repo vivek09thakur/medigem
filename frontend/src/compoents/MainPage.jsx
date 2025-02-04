@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Markdown from "react-markdown";
 import "./styles/Main.css";
 
@@ -19,7 +19,7 @@ const MainPage = () => {
 
   const typeMessage = (text, index = 0) => {
     if (index < text.length) {
-      setDisplayText((prev) => text.substring(0, index + 1));
+      setDisplayText(() => text.substring(0, index + 1));
       setTimeout(() => typeMessage(text, index + 1), 0.5);
     } else {
       setTyping(false);
@@ -46,11 +46,12 @@ const MainPage = () => {
         role: "bot",
         text: data.response || "I'm not sure how to respond. 😕",
       };
+      console.log(data);
       setMessages((prev) => [...prev, botMessage]);
       setTyping(true);
       setDisplayText("");
       typeMessage(botMessage.text);
-    } catch (error) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         { role: "bot", text: "Error fetching response. ❌" },
@@ -63,7 +64,7 @@ const MainPage = () => {
       <div className="chat-box">
         {showBanner && messages.length === 0 && (
           <div className="welcome-banner">
-            <h2>Hi I'm medigem 👋</h2>
+            <h2>Hi I&apos;m medigem 👋</h2>
             <p>Ask me anything about health and medical advice! 💊 🏥</p>
           </div>
         )}
