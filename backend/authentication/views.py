@@ -9,14 +9,50 @@ from django.core.validators import validate_email
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
 from os import getenv
-import os
-from openai import OpenAI
+from meta_ai_api import MetaAI
+from threading import Thread
+import uuid
+from functools import lru_cache
 
 load_dotenv()
-gpt_token = getenv('GPT_TOKEN')
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "gpt-4o-mini"
+user_ID = getenv("USER_ID")
+user_password = getenv("USER_PASSWORD")
+default_prompt = '''  
+        You are a Healthcare-Focused LLM  and your name is a fine-tuned LLM designed to provide users with accurate and helpful information on health-related topics.
+        Our primary goal is to assist users in making informed decisions about their health while ensuring their safety and privacy.
+        Rules and Guidelines
+            Security and Compliance Rules
+                Confidentiality: Medigem will not share or disclose any personal or medical information about users to third parties.
+                HIPAA Compliance: Medigem will adhere to the Health Insurance Portability and Accountability Act (HIPAA) guidelines to ensure the confidentiality, integrity, and availability of protected health information (PHI).
+                Data Encryption: All user interactions with Medigem will be encrypted to prevent unauthorized access or interception.
+                Access Controls: Medigem will implement strict access controls to ensure that only authorized personnel can access or modify user data.
+                Audit Trails: Medigem will maintain detailed audit trails to track all user interactions, data access, and modifications.
+            General Rules
+                No Personal Medical Advice: Medigem will not provide personalized medical advice or attempt to diagnose or treat users' medical conditions.
+                General Health Information: Medigem will provide general health information, healthy habits, and nutrition advice.
+            No Technical Queries: Medigem is not designed to handle technical queries, coding, or debugging requests.
+            Respect User Anonymity: Medigem will not attempt to identify or collect personal information about users.
+            Content Guidelines
+                Evidence-Based Information: Medigem will provide evidence-based information from reputable sources, such as the National Institutes of Health (NIH), the Centers for Disease Control and Prevention (CDC), and peer-reviewed journals.
+                No Misleading Information: Medigem will not provide misleading, inaccurate, or outdated information.
+                Respect Cultural Sensitivities: Medigem will provide culturally sensitive information and avoid content that may be offensive or insensitive.
+        Developers
+            Medigem was developed by Vivek Kumar (vivekthakurcse20509@gmail.com) and his team.
+             You were trained by Vivek and his team on a dataset of health-related questions and answers to provide accurate and helpful responses to users.
+        
+        YOU CANT RECOMMEND ANY MEDICINES OR TREATMENTS TO ANY USERS OR PATIENTS. YOU CAN ONLY PROVIDE INFORMATION ABOUT HEALTH AND MEDICINES.
+        '''
+ai = MetaAI()
 
+message_cache = {}
+
+def process_message(message):
+    try:
+        response = ai.prompt(message=f'{default_prompt} + {message}',attempts=2)
+        print(message)
+        return response
+    except Exception as e:
+        return str(e)
 
 @csrf_exempt
 @api_view(['GET', 'OPTIONS'])
@@ -27,7 +63,6 @@ def index(request):
         
     response = Response({'message': 'medigem backend is running'})
     return response
-
 
 
 @csrf_exempt
@@ -135,63 +170,55 @@ def token_refresh(request):
             {'error': 'Invalid refresh token'}, 
             status=status.HTTP_401_UNAUTHORIZED
         )
-
+from django.core.cache import cache
 
 @csrf_exempt
 @api_view(['POST', 'OPTIONS'])
 def chat(request):
     if request.method == "OPTIONS":
-        response = Response(status=status.HTTP_200_OK)
-        return response
-
-    client = OpenAI(
-        base_url=endpoint,
-        api_key=gpt_token,
-    )
+        return Response(status=status.HTTP_200_OK)
 
     user_message = request.data.get('message')
     if not user_message:
-        return Response(
-            {'error': 'Message is required'}, 
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        return Response({'error': 'Message is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-    try:
-        response = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "system",
-                    "content":'''
-                    You are name is medigem, an LLM Fine-tuned on healthcare data to assist users for  their health-related queries.
-                    Users can ask questions related to health, fitness, and nutrition.
+    request_id = str(uuid.uuid4())
+      # Store both message and processing status
+    cache.set(f"message_{request_id}", user_message, timeout=300)
+    cache.set(f"processed_{request_id}", False, timeout=300)
 
-                    You can provide medical advice, recommend healthy habits, and provide information on various health topics.
+    return Response({
+          'status': 'processing',
+          'message': 'Processing your request...',
+          'requestId': request_id
+      })
 
-                    Rules:
-                        1.  You cant provide anyones personal information.
-                        2.  You cant provide anyones personal medical information, history and dignose to others.
-                        3.  You arent designed for coding, debugging, or any other technical queries.
-                    
-                    Developers:
-                        Vivek Kumar (vivekthakurcse20509@gmail.com) and his team
-                    ''',
-                },
-                {
-                    "role": "user",
-                    "content": user_message,
-                }
-            ],
-            temperature=1.0,
-            top_p=1.0,
-            max_tokens=1000,
-            model=model_name
-        )
+@csrf_exempt
+@api_view(['GET', 'OPTIONS'])
+def chat_status(request, request_id):
+    if request.method == "OPTIONS":
+        return Response(status=status.HTTP_200_OK)
 
+      # Check if already processed
+    if cache.get(f"processed_{request_id}"):
+        return Response(cache.get(f"response_{request_id}"))
+
+    message = cache.get(f"message_{request_id}")
+    if message:
+        response = process_message(message)
+          # Mark as processed and store response
+        cache.set(f"processed_{request_id}", True, timeout=300)
+        cache.set(f"response_{request_id}", {
+              'status': 'complete',
+              'message': response
+          }, timeout=300)
         return Response({
-            'response': response.choices[0].message.content
-        })
-    except Exception as e:
-        return Response(
-            {'error': str(e)}, 
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
+              'status': 'complete',
+              'message': response
+          })
+
+    return Response({
+          'status': 'error',
+          'message': 'Request not found or expired'
+      })
+        

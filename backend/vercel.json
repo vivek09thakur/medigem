@@ -4,5 +4,10 @@
       "src": "/(.*)",
       "dest": "api/wsgi.py"
     }
-  ]
+  ],
+  "functions": {
+    "authentication/views.py": {
+      "maxDuration": 60
+    }
+  }
 }

@@ -1,5 +1,5 @@
 :root {
-    --bg-primary: #0e1216;
+    --bg-primary: #19191a;
     --bg-secondary: #0a0a0a;
     --text-primary: #e3e3e3;
     --accent-color: #44ef61;
@@ -90,7 +90,7 @@
 }
 
 .messages {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 100px);
     overflow-y: auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -113,10 +113,31 @@
 }
 
 .message.bot {
-    background: var(--bg-secondary);
+    background: #252e37;
     color: var(--text-primary);
     padding: 2rem;
     line-height: 1.6;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.message.bot.loading {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 1rem;
 }
 
 .input-box {
@@ -169,21 +190,11 @@
 }
 
 .messages::-webkit-scrollbar {
-    width: 8px;
+    width: 0;
+    display: none;
 }
 
-.messages::-webkit-scrollbar-track {
-    background: var(--bg-primary);
-}
 
-.messages::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
-    border-radius: 4px;
-}
-
-.messages::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-hover);
-}
 
 /* Tablet Styles */
 @media screen and (max-width: 1024px) {
