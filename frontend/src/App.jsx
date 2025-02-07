@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LandingPage from "./compoents/LandingPage";
-import Login from "./compoents/Login";
-import SignUp from "./compoents/SignUp";
-import MainPage from "./compoents/MainPage";
-import PrivateRoute from "./compoents/PrivateRoutes";
-import About from "./compoents/atoms/about";
+import LandingPage from "./components/LandingPage";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import MainPage from "./components/MainPage";
+import PrivateRoute from "./components/PrivateRoutes";
+import About from "./components/atoms/about";
 import "./App.css";
 
 function App() {

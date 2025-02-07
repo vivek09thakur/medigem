@@ -67,7 +67,7 @@ const Login = () => {
         </button>
       </form>
       <p className="login-signup-prompt">
-        Don't have an account?{" "}
+        Don&lsquo;t have an account?{" "}
         <Link className="login-signup-link" to="/signup">
           Create account
         </Link>
