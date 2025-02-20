@@ -6,4 +6,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('token/refresh/', views.token_refresh, name='token_refresh'),
+    path('chat/', views.chat, name='chat'),
+    path('chat/status/<str:request_id>/', views.chat_status, name='chat_status'),
 ]

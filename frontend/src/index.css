@@ -1,7 +1,16 @@
-:root{
-    --primary-background: #fdfdfd;
-    --text-color: #000000;
-    --link-color: #5fa4ff;
+:root {
+    --bg-primary: #a3a0a0;
+    --bg-secondary: #252525;
+    --text-primary: #e3e3e3;
+    --accent-color: #98f7a7;
+    --accent-hover: #7ed385;
+    --border-color: rgba(255,255,255,0.1);
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --font-size-sm: 0.8rem;
+    --font-size-md: 0.9rem;
+    --font-size-lg: 1.1rem;
     --poppins: 'Poppins', sans-serif;
     --roboto: 'Roboto Mono', monospace;
 }
@@ -9,10 +18,11 @@
 html{
     height: 100dvh;
     width: 100%;
+    scroll-behavior: smooth;
 }
 
 body{
-    background: var(--primary-background);
+    background: var(--bg-primary);
     font-family: var(--poppins);
-    color: var(--text-color);
+    color: var(--text-primary);
 }
